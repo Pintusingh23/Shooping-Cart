@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import { signin } from '../api/api';
 const SignIn = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // You can send this data to the backend API for login
-    console.log('User signed in with:', formData);
+    setError('');
+    try {
+      const result = await signin(email, password); // signin function should be defined somewhere in your auth logic
+      alert(result.message);  // Successful signup
+      navigate('/');  // Redirect to dashboard on successful login
+    } catch (error) {
+      setError(error.response?.data?.message || 'Error logging in');  // Handle login error
+    }
   };
 
   return (
     <div className="container mx-auto p-6 max-w-md">
       <h1 className="text-3xl font-bold mb-6 text-center">Sign In</h1>
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md">
+      <form onSubmit={handleLogin} className="bg-white p-6 rounded shadow-md">
         <div className="mb-4">
           <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="email">Email</label>
           <input
@@ -31,8 +30,8 @@ const SignIn = () => {
             id="email"
             name="email"
             placeholder="you@example.com"
-            value={formData.email}
-            onChange={handleInputChange}
+            value={email}  // Use the email state
+            onChange={(e) => setEmail(e.target.value)}  // Update the email state
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
@@ -44,8 +43,8 @@ const SignIn = () => {
             id="password"
             name="password"
             placeholder="********"
-            value={formData.password}
-            onChange={handleInputChange}
+            value={password}  // Use the password state
+            onChange={(e) => setPassword(e.target.value)}  // Update the password state
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
@@ -54,6 +53,7 @@ const SignIn = () => {
           Sign In
         </button>
       </form>
+      {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
       <p className="text-sm mt-4 text-center">Don't have an account? <a href="/signup" className="text-blue-500 hover:underline">Sign Up</a></p>
     </div>
   );
