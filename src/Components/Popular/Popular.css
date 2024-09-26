@@ -1,27 +1,66 @@
+/* Popular Component */
 .popular {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    height: 90vh;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 50px;
 }
 
-.popular h {
+.popular h1 {
     color: #171717;
-    font-size: 50px;
+    font-size: 28px;
     font-weight: 600;
+    text-align: center;
 }
 
 .popular hr {
-    width: 200px;
-    height: 6px;
+    width: 100px;
+    height: 4px;
     border-radius: 10px;
     background: #252525;
-
 }
 
 .popular-item {
-    margin-top: 50px;
-    display: flex;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 30px;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .popular h1 {
+        font-size: 36px;
+    }
+
+    .popular hr {
+        width: 150px;
+    }
+
+    .popular-item {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .popular {
+        padding: 40px;
+    }
+
+    .popular h1 {
+        font-size: 50px;
+    }
+
+    .popular hr {
+        width: 200px;
+        height: 6px;
+    }
+
+    .popular-item {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
