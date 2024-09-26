@@ -1,64 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import ProductList from './components/ProductList';
-import Cart from './components/Cart';
-import Footer from './components/Footer';
-import SignUp from './components/SignUp';
-import SignIn from './components/SignIn';
+import './App.css';
+import Navbar from './Components/Navbar/Navbar';
+import Shop from './Pages/Shop';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import ShopCategory from './Pages/ShopCategory';
+import Product from './Pages/Product';
+import Cart from './Pages/Cart';
+import Footer from './Components/Footer/Footer';
+import men_banner from './Components/Assets/banner_mens.png';
+import women_banner from './Components/Assets/banner_women.png';
+import kid_banner from './Components/Assets/banner_kids.png';
+import SignIn from './Pages/Login';
+import SignUp from './Pages/SignUp';
 
-function App() {
-  const [cartItems, setCartItems] = useState([]);
+const AppContent = () => {
+  const location = useLocation();
 
-  // Load cart items from localStorage when the app loads
-  useEffect(() => {
-    const savedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    setCartItems(savedCartItems);
-  }, []);
-
-  // Save cart items to localStorage whenever the cartItems state changes
-  useEffect(() => {
-    if (cartItems.length > 0) {
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }
-  }, [cartItems]);
-
-  const handleAddToCart = (product) => {
-    const updatedCart = [...cartItems];
-    const existingProductIndex = updatedCart.findIndex(
-      (item) => item.id === product.id
-    );
-
-    if (existingProductIndex >= 0) {
-      updatedCart[existingProductIndex].quantity += 1; // If product already exists in the cart, increase its quantity
-    } else {
-      updatedCart.push({ ...product, quantity: 1 }); // If product doesn't exist, add it with quantity 1
-    }
-
-    setCartItems(updatedCart); // Update state
-  };
-
-  const handleRemoveFromCart = (productId) => {
-    const updatedCart = cartItems.filter((item) => item.id !== productId);
-    setCartItems(updatedCart);
-  };
+  // Check if the current path is for SignIn or SignUp
+  const isAuthRoute = location.pathname === '/signin' || location.pathname === '/signup';
 
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen">
-        <Navbar cartItems={cartItems} />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<ProductList onAddToCart={handleAddToCart} />} />
-            <Route path="/products" element={<ProductList onAddToCart={handleAddToCart} />} />
-            <Route path="/cart" element={<Cart cartItems={cartItems} onRemoveFromCart={handleRemoveFromCart} />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <>
+      {!isAuthRoute && <Navbar />}
+      <Routes>
+        <Route path='/' element={<Shop />} />
+        <Route path='/mens' element={<ShopCategory banner={men_banner} category="men" />} />
+        <Route path='/womens' element={<ShopCategory banner={women_banner} category="women" />} />
+        <Route path='/kids' element={<ShopCategory banner={kid_banner} category="kid" />} />
+        <Route path='/product'>
+          <Route path=':productId' element={<Product />} />
+        </Route>
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/signin' element={<SignIn />} />
+        <Route path='/signup' element={<SignUp />} />
+      </Routes>
+      {!isAuthRoute && <Footer />}
+    </>
+  );
+};
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
