@@ -2,10 +2,28 @@ import React, { useContext } from "react";
 import "./CartItems.css";
 import { ShopContext } from "../../Context/ShopContext";
 import remove_icon from "../Assets/cart_cross_icon.png";
+import { toast, ToastContainer } from "react-toastify"; // Import toast functions
+import "react-toastify/dist/ReactToastify.css"; // Import toastify CSS
 
 const CartItems = () => {
-  const { all_product, cartItems, removeFromCart, getTotalCartAmount} = useContext(ShopContext);
-  console.log(getTotalCartAmount);
+  const { all_product, cartItems, removeFromCart, getTotalCartAmount } = useContext(ShopContext);
+
+  const handleCheckout = () => {
+    const totalAmount = getTotalCartAmount();
+  
+    if (totalAmount > 0) {
+      // Show success toast if cart is not empty
+      toast.success("Payment Done!", {
+        position: "top-center",
+      });
+    } else {
+      // Show warning toast if cart is empty
+      toast.warning("Cart is empty!", {
+        position: "top-center",
+      });
+    }
+  };
+
   return (
     <div className="cartItems">
       <div className="cartItems-format-main">
@@ -58,20 +76,16 @@ const CartItems = () => {
             </div>
             <hr />
             <div className="cartItems-total-item">
-                <h3>Total</h3>
-                <h3>${getTotalCartAmount()}</h3>
+              <h3>Total</h3>
+              <h3>${getTotalCartAmount()}</h3>
             </div>
           </div>
-          <button>PROCEED TO CHECKOUT</button>
-        </div>
-        <div className="cartItems-promocode">
-            <p>If you have a promo code, Enter it here</p>
-            <div className="cartItems-promobox">
-                <input type="text" placeholder="promo code" />
-                <button>Submit</button>
-            </div>
+          <button onClick={handleCheckout}>PROCEED TO CHECKOUT</button>
         </div>
       </div>
+
+      {/* ToastContainer for showing the toast messages */}
+      <ToastContainer />
     </div>
   );
 };

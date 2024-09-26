@@ -1,14 +1,16 @@
 .navbar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 16px;
     box-shadow: 0 1px 3px -2px black;
+    align-items: center;
+    position: relative;
 }
 
 .nav_logo {
     display: flex;
     align-items: center;
-    gap: 10xp;
+    gap: 10px;
 }
 
 .nav_logo p {
@@ -66,7 +68,8 @@
 .cart button:active {
     background: #FF4141;
 }
-.nav_cart_count{
+
+.nav_cart_count {
     width: 22px;
     height: 22px;
     display: flex;
@@ -78,4 +81,48 @@
     font-size: 14px;
     background: red;
     color: white;
+}
+
+/* Hamburger menu */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav_menu {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease;
+    }
+
+    .mobileMenuActive {
+        height: 200px; /* Adjust the height based on your content */
+    }
+
+    .cart {
+        display: none; /* Hide cart on small screens if desired */
+    }
+}
+
+@media (max-width: 480px) {
+    .nav_logo p {
+        font-size: 24px;
+    }
 }

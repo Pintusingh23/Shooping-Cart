@@ -7,43 +7,40 @@ import { ShopContext } from "../../Context/ShopContext";
 
 const Navbar = () => {
   const [menu, setMenu] = useState("shop");
-  const {getTotalCartItems} = useContext(ShopContext)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { getTotalCartItems } = useContext(ShopContext);
+
+  // Toggle mobile menu
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <div className={Classes.navbar}>
       <div className={Classes.nav_logo}>
         <img src={logo} alt="logo" />
         <p>SHOPPER</p>
       </div>
-      <ul className={Classes.nav_menu}>
-        <li
-          onClick={() => {
-            setMenu("shop");
-          }}
-        >
-          <Link style={{textDecoration: 'none'}} to='/'>Shop</Link> {menu ==="shop"?<hr/>:<></>}
+
+      <button className={Classes.hamburger} onClick={toggleMobileMenu}>
+        ☰
+      </button>
+
+      <ul className={`${Classes.nav_menu} ${isMobileMenuOpen ? Classes.mobileMenuActive : ''}`}>
+        <li onClick={() => setMenu("shop")}>
+          <Link style={{ textDecoration: 'none' }} to='/'>Shop</Link> {menu === "shop" ? <hr /> : <></>}
         </li>
-        <li
-          onClick={() => {
-            setMenu("mens");
-          }}
-        >
-          <Link style={{textDecoration: 'none'}} to='/mens'>Men</Link> {menu ==="mens"?<hr/>:<></>}
+        <li onClick={() => setMenu("mens")}>
+          <Link style={{ textDecoration: 'none' }} to='/mens'>Men</Link> {menu === "mens" ? <hr /> : <></>}
         </li>
-        <li
-          onClick={() => {
-            setMenu("womens");
-          }}
-        >
-          <Link style={{textDecoration: 'none'}} to='/womens'>Women</Link> {menu ==="womens"?<hr/>:<></>}
+        <li onClick={() => setMenu("womens")}>
+          <Link style={{ textDecoration: 'none' }} to='/womens'>Women</Link> {menu === "womens" ? <hr /> : <></>}
         </li>
-        <li
-          onClick={() => {
-            setMenu("kids");
-          }}
-        >
-          <Link style={{textDecoration: 'none'}} to='/kids'>Kids</Link> {menu ==="kids"?<hr/>:<></>}
+        <li onClick={() => setMenu("kids")}>
+          <Link style={{ textDecoration: 'none' }} to='/kids'>Kids</Link> {menu === "kids" ? <hr /> : <></>}
         </li>
       </ul>
+
       <div className={Classes.cart}>
         <Link to='/signin'><button>Login</button></Link>
         <Link to='/cart'><img src={cart_icon} alt="cart" /></Link>
