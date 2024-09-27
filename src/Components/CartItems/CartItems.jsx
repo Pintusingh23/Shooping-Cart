@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
-import "./CartItems.css";
-import { ShopContext } from "../../Context/ShopContext";
-import remove_icon from "../Assets/cart_cross_icon.png";
-import { toast, ToastContainer } from "react-toastify"; // Import toast functions
-import "react-toastify/dist/ReactToastify.css"; // Import toastify CSS
+import React, { useContext } from 'react';
+import './CartItems.css';
+import { ShopContext } from '../../Context/ShopContext';
+import remove_icon from '../Assets/cart_cross_icon.png';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CartItems = () => {
   const { all_product, cartItems, removeFromCart, getTotalCartAmount } = useContext(ShopContext);
 
   const handleCheckout = () => {
     const totalAmount = getTotalCartAmount();
-  
+
     if (totalAmount > 0) {
       // Show success toast if cart is not empty
       toast.success("Payment Done!", {
@@ -25,8 +25,8 @@ const CartItems = () => {
   };
 
   return (
-    <div className="cartItems">
-      <div className="cartItems-format-main">
+    <div className='cartitems'>
+      <div className="cartitems-format-main">
         <p>Products</p>
         <p>Title</p>
         <p>Price</p>
@@ -39,20 +39,17 @@ const CartItems = () => {
         if (cartItems[e.id] > 0) {
           return (
             <div key={e.id}>
-              <p>product Id: {e.id}</p>
-              <div className="cartItems-format cartItems-format-main">
-                <img src={e.image} alt="" className="cartItem-product-icon" />
+              <div className="cartitems-format cartitems-format-main">
+                <img src={e.image} alt={e.name} className='carticon-product-icon' />
                 <p>{e.name}</p>
-                <p>$ {e.new_price}</p>
-                <button className="cartItem-quantity">{cartItems[e.id]}</button>
-                <p>$ {e.new_price * cartItems[e.id]}</p>
+                <p>${e.new_price}</p>
+                <button className='cartitems-quantity'>{cartItems[e.id]}</button>
+                <p>${e.new_price * cartItems[e.id]}</p>
                 <img
-                  className="cartItem-remove-icon"
+                  className='cartitems-remove-icon'
                   src={remove_icon}
-                  alt="remove"
-                  onClick={() => {
-                    removeFromCart(e.id);
-                  }}
+                  onClick={() => removeFromCart(e.id)}
+                  alt="Remove icon"
                 />
               </div>
               <hr />
@@ -61,31 +58,31 @@ const CartItems = () => {
         }
         return null;
       })}
-      <div className="cartItems-down">
-        <div className="cartItems-total">
-          <h1>Cart Total</h1>
+      <div className="cartitems-down">
+        <div className="cartitems-total">
+          <h1>Cart Totals</h1>
           <div>
-            <div className="cartItems-total-item">
-              <p>SubTotal</p>
+            <div className="cartitems-total-item">
+              <p>Subtotal</p>
               <p>${getTotalCartAmount()}</p>
             </div>
             <hr />
-            <div className="cartItems-total-item">
+            <div className="cartitems-total-item">
               <p>Shipping Fee</p>
               <p>Free</p>
             </div>
             <hr />
-            <div className="cartItems-total-item">
+            <div className="cartitems-total-item">
               <h3>Total</h3>
               <h3>${getTotalCartAmount()}</h3>
             </div>
           </div>
           <button onClick={handleCheckout}>PROCEED TO CHECKOUT</button>
         </div>
+        <div className="cartitems-promocode">
+          
+        </div>
       </div>
-
-      {/* ToastContainer for showing the toast messages */}
-      <ToastContainer />
     </div>
   );
 };

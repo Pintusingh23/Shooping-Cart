@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const backendURL = "https://server-placement.vercel.app" || 'http://localhost:5001'; // Fallback to local URL during development
+const backendURL = "https://server-placement.vercel.app" 
 
 export const signup = async (email, password) => {
   try {
@@ -26,7 +26,6 @@ export const signup = async (email, password) => {
 export const signin = async (email, password) => {
   try {
     const response = await axios.post(`${backendURL}/api/login`, { email, password });
-    alert(response.data.message);  // Assuming message exists in response
     return response.data;  // Return response data if needed
   } catch (error) {
     if (error.response) {

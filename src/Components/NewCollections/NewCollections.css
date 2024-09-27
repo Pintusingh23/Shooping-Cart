@@ -1,66 +1,26 @@
-/* NewCollections Component */
-.new-collections {
+.new-collections{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 20px;
-    margin-bottom: 50px;
+    gap: 5px;
+   margin-bottom: 100px;
 }
-
-.new-collections h1 {
+.new-collections h1{
     color: #171717;
-    font-size: 28px;
+    font-size: 40px;
     font-weight: 600;
-    text-align: center;
 }
-
 .new-collections hr {
-    width: 100px;
+    width: 150px;
     height: 4px;
     border-radius: 10px;
     background: #252525;
-}
-
-.collections {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin-top: 30px;
-}
-
-/* Media Queries */
-@media (min-width: 768px) {
-    .new-collections h1 {
-        font-size: 36px;
-    }
-
-    .new-collections hr {
-        width: 150px;
-    }
-
-    .collections {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
-@media (min-width: 1024px) {
-    .new-collections {
-        padding: 40px;
-    }
-
-    .new-collections h1 {
-        font-size: 50px;
-    }
-
-    .new-collections hr {
-        width: 200px;
-        height: 6px;
-    }
-
-    .collections {
-        grid-template-columns: repeat(4, 1fr);
-    }
+  }
+.collections{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 60px auto;
+    gap: 30px;
+    max-width: 1280px;
 }

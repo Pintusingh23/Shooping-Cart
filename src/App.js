@@ -10,7 +10,9 @@ import men_banner from './Components/Assets/banner_mens.png';
 import women_banner from './Components/Assets/banner_women.png';
 import kid_banner from './Components/Assets/banner_kids.png';
 import SignIn from './Pages/Login';
-import SignUp from './Pages/SignUp';
+import SignUp from './Pages/Signup';
+import { ToastContainer } from 'react-toastify'; // Import ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 
 const AppContent = () => {
   const location = useLocation();
@@ -42,6 +44,7 @@ function App() {
   return (
     <BrowserRouter>
       <AppContent />
+      <ToastContainer />
     </BrowserRouter>
   );
 }

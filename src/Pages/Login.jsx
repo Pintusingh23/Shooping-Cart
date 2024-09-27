@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signin } from './api/api';
+import { useAuth } from '../Context/AuthContext';
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const {loginState, setLoginState} = useAuth()
 
   const handleLogin = async (e) => {
+    setLoginState(true)
     e.preventDefault();
     setError('');
     try {

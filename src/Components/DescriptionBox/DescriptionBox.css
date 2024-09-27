@@ -1,63 +1,41 @@
-/* DescriptionBox.css */
-.descriptionBox {
-    margin: 60px auto;
-    max-width: 1000px;
-    padding: 0 20px;
+.descriptionbox{
+    margin: 120px 170px;
 }
-
-.descriptionBox-navigator {
+.descriptionbox-navigator{
     display: flex;
-    flex-wrap: wrap;
 }
-
-.descriptionBox-nav-box {
+.descriptionbox-nav-box{
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 16px;
     font-weight: 600;
-    width: 50%;
+    width: 171px;
     height: 70px;
     border: 1px solid #d0d0d0;
 }
-
-.descriptionBox-nav-box.fade {
+.descriptionbox-nav-box.fade{
     background: #FBFBFB;
     color: #555;
 }
-
-.descriptionBox-description {
+.descriptionbox-description{
     display: flex;
     flex-direction: column;
     gap: 25px;
     border: 1px solid #D0D0D0;
-    padding: 30px;
+    padding: 48px;
+    padding-bottom: 70px;
 }
-
-@media (max-width: 768px) {
-    .descriptionBox {
-        margin: 40px auto;
+@media(max-width:1280px){
+    .descriptionbox{
+        margin: 60px 60px;
     }
-    
-    .descriptionBox-nav-box {
+}
+@media(max-width:1280px){
+    .descriptionbox{
+        margin: 60px 20px;
+    }
+    .descriptionbox-description{
         font-size: 14px;
-        height: 60px;
-    }
-    
-    .descriptionBox-description {
-        padding: 20px;
-        gap: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .descriptionBox-nav-box {
-        width: 100%;
-        height: 50px;
-    }
-    
-    .descriptionBox-description {
-        padding: 15px;
-        gap: 10px;
     }
 }

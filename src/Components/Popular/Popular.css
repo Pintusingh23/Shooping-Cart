@@ -1,66 +1,38 @@
-/* Popular Component */
-.popular {
+.popular{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 20px;
-    margin-bottom: 50px;
+    gap: 10px;
+    max-width: 1280px;
+    margin: auto;
 }
-
-.popular h1 {
+.popular h1{
     color: #171717;
-    font-size: 28px;
+    font-size: 40px;
     font-weight: 600;
-    text-align: center;
 }
-
-.popular hr {
-    width: 100px;
+.popular hr{
+    width: 150px;
     height: 4px;
     border-radius: 10px;
     background: #252525;
 }
-
-.popular-item {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin-top: 30px;
+.popular-item{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
 }
+/* ---------- media query------------ */
 
-/* Media Queries */
-@media (min-width: 768px) {
-    .popular h1 {
-        font-size: 36px;
+@media(max-width: 800px){
+    .popular h1{
+        font-size: 30px;
     }
-
-    .popular hr {
-        width: 150px;
-    }
-
-    .popular-item {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
-@media (min-width: 1024px) {
-    .popular {
-        padding: 40px;
-    }
-
-    .popular h1 {
-        font-size: 50px;
-    }
-
-    .popular hr {
-        width: 200px;
-        height: 6px;
-    }
-
-    .popular-item {
-        grid-template-columns: repeat(4, 1fr);
+    .popular hr{
+        width: 80px;
+        height: 4px;
+        
     }
 }
