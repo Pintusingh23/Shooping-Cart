@@ -10,7 +10,7 @@ import men_banner from './Components/Assets/banner_mens.png';
 import women_banner from './Components/Assets/banner_women.png';
 import kid_banner from './Components/Assets/banner_kids.png';
 import SignIn from './Pages/Login';
-import SignUp from './Pages/Signup';
+import SignUp from './Pages/SignUp.jsx';
 import { ToastContainer } from 'react-toastify'; // Import ToastContainer
 import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 
